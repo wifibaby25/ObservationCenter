@@ -30,6 +30,14 @@
         <activity android:name=".ui.MemberActivity" android:exported="false" />
         <activity android:name=".ui.VisitorsActivity" android:exported="false" />
         <activity android:name=".ui.TicketsActivity" android:exported="false" />
+        <activity android:name=".ui.OrderDetailActivity" android:exported="false" />
+        <activity android:name=".ui.StockActivity" android:exported="false" />
+        <activity android:name=".ui.CommodityActivity" android:exported="false" />
+        <activity android:name=".ui.BlocklistActivity" android:exported="false" />
+        <activity android:name=".ui.SearchActivity" android:exported="false" />
+        <activity android:name=".ui.DeviceActivity" android:exported="false" />
+        <activity android:name=".ui.QuickManageActivity" android:exported="false" />
+        <activity android:name=".ui.RulesManageActivity" android:exported="false" />
         <service
             android:name=".ui.SseService"
             android:exported="false"

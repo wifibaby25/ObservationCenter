@@ -22,10 +22,20 @@
 - 快捷回复话术一键填入、结束对话、封 IP / 封会员
 
 ### 订单与管理
-- 订单列表（分页）、重新发货
+- 订单列表（分页 + 最近 / 待发货 / 失败 / 搁置筛选）、订单详情（卡密复制、套餐规格、买家留言、下单 IP 地区、下单设备）、重新发货
+- 低库存预警列表、商品详情（余卡、今日售出、在售套餐、待补订单、热度）
 - 提现审核（通过 / 驳回填理由）、支付通道暂停 / 恢复
 - 访客列表（在线 / 今日 / 全部）、访客详情（IP、地区、设备、访问次数、时间线、历史订单）
 - 会员详情（账户信息、关联访客、订单、同设备关联）、工单列表
+
+### 封禁与安全
+- 封禁名单查看（IP / 设备）、新增 IP / 网段封禁、解除 IP 封禁、解除设备封锁
+- 设备详情（短号、特征、使用过的 IP、关联会员 / 访客）、封锁 / 解除封锁设备
+
+### 全局搜索与话术
+- 全局搜索：会员、访客、订单、商品、设备分组结果，点击直达对应详情页
+- 话术库增删改（标题 + 内容）
+- 自动回复规则增删改：关键词（逗号分隔）、精确 / 包含匹配、回复内容、启用 / 停用切换
 
 ## 编译运行
 
@@ -52,13 +62,17 @@
 | 订单 / 重发 | POST `/plugin/ObservationCenter/admin/orders\|redeliver` | — |
 | 提现 / 通道 | POST `/plugin/ObservationCenter/admin/cashes\|cashDecide\|payments\|payPause\|payResume` | — |
 | 访客 / 会员 / 工单 | POST `/plugin/ObservationCenter/admin/visitor\|member\|visitorsPage\|tickets` | — |
+| 订单详情 / 商品 / 库存 | POST `/plugin/ObservationCenter/admin/order\|commodity\|stock` | id / threshold |
+| 封禁名单 / 封禁 / 解封 / 设备 | POST `/plugin/ObservationCenter/admin/blocks\|block\|unblock\|blockDevice\|unblockDevice\|device` | ip / fp |
+| 全局搜索 | POST `/plugin/ObservationCenter/admin/search` | q |
+| 话术 / 规则 | POST `/plugin/ObservationCenter/adminChat/quick\|quickSave\|quickDelete\|rules\|ruleSave\|ruleDelete` | id, title, body, keywords, mode, enabled |
 
 所有业务接口需带会话 Cookie，并在请求头带 `Referer: https://你的域名/`（服务端校验同源 host）。
 
 ## 未包含
 
 - 离线推送（FCM / 厂商通道，需服务端配合）
-- 快捷回复 / 自动回复规则的增删管理、Telegram 转接、数据导出 CSV、封禁名单管理、库存预警、全局搜索等（均为后台设置项，按需后续补齐）
+- 店铺详情页、Telegram 转接、数据导出 CSV（按需后续补齐）
 
 ## 说明
 

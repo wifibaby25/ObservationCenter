@@ -34,6 +34,21 @@ class ManageFragment : Fragment() {
         b.btnTickets.setOnClickListener {
             startActivity(android.content.Intent(context, com.observer.center.ui.TicketsActivity::class.java))
         }
+        b.btnSearch.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.SearchActivity::class.java))
+        }
+        b.btnBlocks.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.BlocklistActivity::class.java))
+        }
+        b.btnStock.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.StockActivity::class.java))
+        }
+        b.btnQuick.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.QuickManageActivity::class.java))
+        }
+        b.btnRules.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.RulesManageActivity::class.java))
+        }
         load()
         return b.root
     }

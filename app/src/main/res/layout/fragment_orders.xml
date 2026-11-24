@@ -5,6 +5,14 @@
     android:orientation="vertical"
     android:background="@color/bg">
 
+    <LinearLayout
+        android:id="@+id/filterBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="6dp" />
+
     <TextView
         android:id="@+id/errorBox"
         android:layout_width="match_parent"
