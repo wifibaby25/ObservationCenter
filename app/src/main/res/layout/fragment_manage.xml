@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/btnVisitors"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:text="访客列表"
+                android:textSize="15sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/bg_btn_outline"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/btnTickets"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:text="工单"
+                android:textSize="15sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/bg_btn_outline" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提现审核"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:paddingVertical="8dp" />
+
+        <LinearLayout
+            android:id="@+id/cashList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/cashEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="暂无待处理提现"
+            android:textSize="13sp"
+            android:textColor="@color/textSub"
+            android:padding="12dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="支付通道"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/payList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/payEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="暂无支付通道"
+            android:textSize="13sp"
+            android:textColor="@color/textSub"
+            android:padding="12dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/manageError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/danger"
+            android:padding="12dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,23 @@
+# ---- Gradle / 构建 ----
+.gradle/
+build/
+**/build/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.log
+
+# ---- 本机配置（含本机 SDK 路径，勿传）----
+local.properties
+
+# ---- IDE ----
+.idea/
+*.iml
+.kotlin/
+captures/
+.cxx/
+
+# ---- 系统垃圾 ----
+.DS_Store
+Thumbs.db

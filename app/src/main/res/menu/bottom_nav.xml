@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navFeed" android:icon="@drawable/ic_nav_feed" android:title="动态" />
+    <item android:id="@+id/navChat" android:icon="@drawable/ic_nav_chat" android:title="会话" />
+    <item android:id="@+id/navOrder" android:icon="@drawable/ic_nav_order" android:title="订单" />
+    <item android:id="@+id/navTodo" android:icon="@drawable/ic_nav_todo" android:title="待办" />
+    <item android:id="@+id/navManage" android:icon="@drawable/ic_nav_manage" android:title="管理" />
+</menu>

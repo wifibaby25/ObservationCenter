@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">观测中心</string>
+    <string name="login">登录</string>
+    <string name="site_url">站点地址，如 https://your.com</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="captcha">验证码</string>
+    <string name="refresh_captcha">点击刷新</string>
+    <string name="tab_feed">动态</string>
+    <string name="tab_chat">会话</string>
+    <string name="tab_todo">待办</string>
+    <string name="tab_stats">数据</string>
+    <string name="send">发送</string>
+    <string name="input_hint">输入消息…</string>
+</resources>
