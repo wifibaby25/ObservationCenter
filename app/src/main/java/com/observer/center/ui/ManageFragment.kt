@@ -49,6 +49,12 @@ class ManageFragment : Fragment() {
         b.btnRules.setOnClickListener {
             startActivity(android.content.Intent(context, com.observer.center.ui.RulesManageActivity::class.java))
         }
+        b.btnStats.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.StatsActivity::class.java))
+        }
+        b.btnHealth.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.HealthActivity::class.java))
+        }
         load()
         return b.root
     }
@@ -114,6 +120,9 @@ class ManageFragment : Fragment() {
         }
         btnApprove.setOnClickListener { decide(id, "approve", null) }
         btnReject.setOnClickListener { askRejectReason(id) }
+        v.setOnClickListener {
+            startActivity(android.content.Intent(context, com.observer.center.ui.CashDetailActivity::class.java).putExtra("id", id))
+        }
         return v
     }
 

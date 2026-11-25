@@ -15,7 +15,7 @@ object Views {
         val ctx = parent.context
         TextView(ctx).apply {
             this.text = text
-            setTextColor(0xFF1F2430.toInt())
+            setTextColor(0xFF1C1C1E.toInt())
             textSize = 15f
             setTypeface(typeface, Typeface.BOLD)
             layoutParams = LinearLayout.LayoutParams(-1, -2).apply {
@@ -46,13 +46,13 @@ object Views {
         }
         val l = TextView(ctx).apply {
             this.text = label
-            setTextColor(0xFF7A8299.toInt())
+            setTextColor(0xFF8E8E93.toInt())
             textSize = 13f
             layoutParams = LinearLayout.LayoutParams(0, -2, 0.32f)
         }
         val v = TextView(ctx).apply {
             this.text = value?.ifEmpty { "—" } ?: "—"
-            setTextColor(0xFF1F2430.toInt())
+            setTextColor(0xFF1C1C1E.toInt())
             textSize = 13f
             layoutParams = LinearLayout.LayoutParams(0, -2, 0.68f)
         }
@@ -66,13 +66,13 @@ object Views {
         val box = card(parent)
         val t = TextView(ctx).apply {
             text = title
-            setTextColor(0xFF1F2430.toInt())
+            setTextColor(0xFF1C1C1E.toInt())
             textSize = 14f
             setTypeface(typeface, Typeface.BOLD)
         }
         val s = TextView(ctx).apply {
             text = sub
-            setTextColor(0xFF7A8299.toInt())
+            setTextColor(0xFF8E8E93.toInt())
             textSize = 12f
             setPadding(0, dp(ctx, 4), 0, 0)
         }
@@ -87,7 +87,7 @@ object Views {
         val ctx = parent.context
         TextView(ctx).apply {
             this.text = text
-            setTextColor(0xFF7A8299.toInt())
+            setTextColor(0xFF8E8E93.toInt())
             textSize = 13f
             gravity = android.view.Gravity.CENTER
             setPadding(0, dp(ctx, 24), 0, dp(ctx, 24))

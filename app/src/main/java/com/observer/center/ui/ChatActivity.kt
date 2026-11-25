@@ -38,6 +38,9 @@ class ChatActivity : AppCompatActivity() {
     private var currentThread: Thread? = null
     private val adapter = ChatAdapter()
     private val translated = HashMap<Long, String>()
+    private val claimKey get() = "thread:$threadId"
+    private var claimInfo: JsonObject? = null
+    private var meId = 0
 
     private val pickImage = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.GetContent()) { uri ->
         uri ?: return@registerForActivityResult
@@ -65,6 +68,7 @@ class ChatActivity : AppCompatActivity() {
         b.btnEnd.setOnClickListener { endChat() }
         b.btnBlock.setOnClickListener { showBlockDialog() }
         b.btnNote.setOnClickListener { editNote() }
+        b.btnClaim.setOnClickListener { toggleClaim() }
         b.btnImage.setOnClickListener { pickImage.launch("image/*") }
         b.btnCard.setOnClickListener { showCardDialog() }
         b.btnQuick.setOnClickListener { showQuickDialog() }
@@ -94,6 +98,51 @@ class ChatActivity : AppCompatActivity() {
                 Api.post("/plugin/ObservationCenter/admin/endChat", mapOf("thread_id" to threadId))
                 toast("对话已结束")
                 finish()
+            } catch (e: Exception) {
+                toast(e.message ?: "操作失败")
+            }
+        }
+    }
+
+    // ---------------- 认领接手 ----------------
+
+    private fun refreshPresence() {
+        lifecycleScope.launch {
+            try {
+                val tab = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 12)
+                val body = Api.post("/plugin/ObservationCenter/admin/presence", mapOf(
+                    "tab" to tab, "visible" to "1", "view" to claimKey, "hold" to claimKey
+                ))
+                val o = GsonHolder.gson.fromJson(body, JsonObject::class.java) ?: return@launch
+                meId = o.get("me")?.asInt ?: 0
+                claimInfo = o.getAsJsonObject("claims")?.getAsJsonObject(claimKey)
+                refreshClaimBtn()
+            } catch (_: Exception) {
+            }
+        }
+    }
+
+    private fun refreshClaimBtn() {
+        val ci = claimInfo ?: run {
+            b.btnClaim.text = "认领"
+            return
+        }
+        val byMe = ci.get("by")?.asInt == meId
+        b.btnClaim.text = when {
+            byMe -> "放下"
+            else -> "接手"
+        }
+    }
+
+    private fun toggleClaim() {
+        val mine = claimInfo != null && claimInfo!!.get("by")?.asInt == meId
+        lifecycleScope.launch {
+            try {
+                Api.post("/plugin/ObservationCenter/admin/claim", mapOf(
+                    "key" to claimKey, "on" to if (mine) "0" else "1"
+                ))
+                toast(if (mine) "已放下" else "已认领接手")
+                refreshPresence()
             } catch (e: Exception) {
                 toast(e.message ?: "操作失败")
             }
@@ -159,6 +208,7 @@ class ChatActivity : AppCompatActivity() {
                 b.title.text = r.thread?.let { (it.name.ifEmpty { "访客" }) + " · " + it.ip } ?: "客服对话"
                 b.recycler.scrollToPosition(messages.size - 1)
                 markRead()
+                refreshPresence()
             } catch (e: Exception) {
                 b.title.text = "加载失败：${e.message}"
             }
@@ -400,7 +450,7 @@ class ChatActivity : AppCompatActivity() {
                     c?.get("status")?.asString?.takeIf { it.isNotEmpty() }?.let { meta.add(it) }
                     c?.get("issue_label")?.asString?.takeIf { it.isNotEmpty() }?.let { meta.add(it) }
                     h.cardMeta.text = meta.joinToString(" · ")
-                    h.cardMeta.setTextColor(if (mine) 0xFF3B6CF6.toInt() else resources.getColor(R.color.textSub, null))
+                    h.cardMeta.setTextColor(if (mine) resources.getColor(R.color.primary, null) else resources.getColor(R.color.textSub, null))
                 }
                 "recalled" -> {
                     h.bubble.visibility = View.VISIBLE

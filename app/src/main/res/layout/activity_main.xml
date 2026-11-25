@@ -9,10 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_top"
-        android:paddingHorizontal="12dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:background="@color/bg"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="6dp"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -20,60 +20,64 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="5dp"
             android:background="@drawable/bg_card"
             android:orientation="vertical"
             android:gravity="center"
-            android:paddingVertical="12dp">
+            android:paddingVertical="16dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="在线" android:textSize="11sp" android:textColor="@color/textSub" />
+                android:text="在线" android:textSize="12sp" android:textColor="@color/textSub" />
             <TextView android:id="@+id/statOnline" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/primary" />
+                android:text="0" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/primary"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="5dp"
             android:background="@drawable/bg_card"
             android:orientation="vertical"
             android:gravity="center"
-            android:paddingVertical="12dp">
+            android:paddingVertical="16dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="今日访客" android:textSize="11sp" android:textColor="@color/textSub" />
+                android:text="今日访客" android:textSize="12sp" android:textColor="@color/textSub" />
             <TextView android:id="@+id/statVisitors" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/primary" />
+                android:text="0" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/primary"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="5dp"
             android:background="@drawable/bg_card"
             android:orientation="vertical"
             android:gravity="center"
-            android:paddingVertical="12dp">
+            android:paddingVertical="16dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="今日订单" android:textSize="11sp" android:textColor="@color/textSub" />
+                android:text="今日订单" android:textSize="12sp" android:textColor="@color/textSub" />
             <TextView android:id="@+id/statOrders" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/primary" />
+                android:text="0" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/primary"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="5dp"
             android:background="@drawable/bg_card"
             android:orientation="vertical"
             android:gravity="center"
-            android:paddingVertical="12dp">
+            android:paddingVertical="16dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="成交额" android:textSize="11sp" android:textColor="@color/textSub" />
+                android:text="成交额" android:textSize="12sp" android:textColor="@color/textSub" />
             <TextView android:id="@+id/statAmount" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="¥0" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/primary" />
+                android:text="¥0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/primary"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -83,15 +87,20 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="62dp"
         android:background="@color/card"
         app:menu="@menu/bottom_nav"
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/nav_tint"
         app:itemTextColor="@color/nav_tint"
         app:itemActiveIndicatorStyle="@null"
-        app:elevation="8dp" />
+        app:elevation="0dp" />
 </LinearLayout>

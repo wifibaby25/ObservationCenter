@@ -16,6 +16,9 @@ class OrderDetailActivity : AppCompatActivity() {
     private lateinit var b: ActivitySimpleBinding
     private var orderId = 0
     private lateinit var cur: JsonObject
+    private val claimKey get() = "order:$orderId"
+    private var claimInfo: JsonObject? = null
+    private var meId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +43,41 @@ class OrderDetailActivity : AppCompatActivity() {
             try {
                 val body = Api.post("/plugin/ObservationCenter/admin/order", mapOf("id" to orderId.toString()))
                 cur = GsonHolder.gson.fromJson(body, JsonObject::class.java) ?: return@launch
+                refreshPresence()
                 render()
             } catch (e: Exception) {
                 Toast.makeText(this@OrderDetailActivity, e.message ?: "加载失败", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    /** 拉一次在场状态，取本单的认领人与自己的 id。 */
+    private suspend fun refreshPresence() {
+        try {
+            val tab = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 12)
+            val body = Api.post("/plugin/ObservationCenter/admin/presence", mapOf(
+                "tab" to tab, "visible" to "1", "view" to claimKey, "hold" to claimKey
+            ))
+            val o = GsonHolder.gson.fromJson(body, JsonObject::class.java) ?: return
+            meId = o.get("me")?.asInt ?: 0
+            val claims = o.getAsJsonObject("claims")
+            claimInfo = claims?.getAsJsonObject(claimKey)
+        } catch (_: Exception) {
+        }
+    }
+
+    private fun toggleClaim() {
+        val mine = claimInfo != null && claimInfo!!.get("by")?.asInt == meId
+        lifecycleScope.launch {
+            try {
+                Api.post("/plugin/ObservationCenter/admin/claim", mapOf(
+                    "key" to claimKey, "on" to if (mine) "0" else "1"
+                ))
+                Toast.makeText(this@OrderDetailActivity, if (mine) "已放下" else "已认领接手", Toast.LENGTH_SHORT).show()
+                refreshPresence()
+                render()
+            } catch (e: Exception) {
+                Toast.makeText(this@OrderDetailActivity, e.message ?: "操作失败", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -127,6 +162,20 @@ class OrderDetailActivity : AppCompatActivity() {
         val device = c.obj("device")
         if (device != null) {
             Views.info(ic, "设备", "${s(device, "label") ?: ""} (${s(device, "short") ?: ""})")
+        }
+
+        // 认领接手
+        val ci = claimInfo
+        Views.section(b.content, "处理认领")
+        val cc = Views.card(b.content)
+        if (ci != null) {
+            val byMe = ci.get("by")?.asInt == meId
+            Views.info(cc, "处理人", (ci.get("name")?.asString ?: "#${ci.get("by")?.asInt ?: 0}") + if (byMe) "（我）" else "")
+            Views.listItem(b.content, if (byMe) "放下认领" else "接手处理",
+                if (byMe) "交给其他同事" else "标记由我处理，避免重复处理") { toggleClaim() }
+        } else {
+            Views.info(cc, "状态", "暂无人认领")
+            Views.listItem(b.content, "认领接手", "标记由我处理，避免重复处理") { toggleClaim() }
         }
 
         // 操作
